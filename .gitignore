@@ -1,12 +1,12 @@
-# Ce depot ne publie que le site statique (maquette/ + Portfolio/) --
-# outils internes, scripts d'automatisation WordPress et ressources de
-# marque brutes exclus volontairement.
+# Ce depot suit le site (maquette/ + Portfolio/) ainsi que les scripts
+# d'automatisation et les ressources de marque -- tout ce qu'il faut pour
+# reprendre le travail depuis une autre machine (voir README.md).
+# Exclus : etat WordPress/Local (specifique a cette machine, voir README),
+# fichiers generes/temporaires.
 
-Ressources/
-*.php
-*.ps1
-*.bat
-*.json
+wp-*.php
+mysqld-manual.log
+portfolio-inventory.json
 *.log
 Thumbs.db
 desktop.ini
