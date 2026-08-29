@@ -103,6 +103,18 @@ dans `maquette/js/data.js` (généré) et `maj-portfolio.ps1`. Ajouter une
 nouvelle catégorie = créer le dossier correspondant dans `Portfolio/Images/`
 et l'ajouter à la liste `CATEGORIES` dans `generate-data-js.ps1`.
 
+## Pièges connus
+
+- **`.nojekyll` à la racine — NE PAS SUPPRIMER.** GitHub Pages traite les
+  sites avec Jekyll par défaut, qui ignore silencieusement tout fichier/
+  dossier commençant par `_` — exactement la convention utilisée pour les
+  photos de couverture (`_Pers0001.jpg`, etc.). Sans ce fichier, toutes les
+  vignettes "_" renvoient un 404 en ligne alors que le reste du site
+  fonctionne, ce qui rend le bug difficile à repérer (le dépôt Git contient
+  bien tous les fichiers — c'est uniquement le *build* Pages qui les
+  ignorait). Symptôme si ça revient : impression que des images "ne se
+  chargent pas" alors que `git status`/`git ls-files` montrent tout présent.
+
 ## Historique / décisions notables
 
 - Design inspiré de bocostudio.com, adapté pour ne pas être un copier-coller
