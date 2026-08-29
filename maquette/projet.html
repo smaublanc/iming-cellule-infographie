@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projet — Groupe IMING</title>
+  <link rel="icon" type="image/png" href="assets/img/mark-iming.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="brand" href="index.html"><img class="brand-logo" src="assets/img/logo-iming.png" alt="Groupe IMING" /></a>
+      <nav class="header-nav">
+        <a class="header-link" href="equipe.html" data-i18n-fr="Équipe" data-i18n-en="Team">Équipe</a>
+        <div class="lang-switch">
+          <button data-lang="fr" class="is-active">FR</button>
+          <span style="opacity:.4">/</span>
+          <button data-lang="en">EN</button>
+        </div>
+        <button class="burger" data-burger aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" data-mobile-nav>
+    <a href="index.html">Accueil</a>
+    <a href="index.html#projets">Projets</a>
+    <a href="equipe.html" data-i18n-fr="Équipe" data-i18n-en="Team">Équipe</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <main data-project></main>
+
+  <footer class="site-footer">
+    <img class="footer-mark" src="assets/img/mark-iming.png" alt="" />
+    <div class="footer-inner">
+      <div>
+        <a href="index.html"><img class="footer-logo" src="assets/img/logo-iming.png" alt="Groupe IMING" /></a>
+        <p class="footer-tagline">Cellule infographie du Groupe IMING — images et animations 3D photoréalistes pour projets d'architecture et d'infrastructure.</p>
+      </div>
+      <div>
+        <span class="footer-col-title">Suivre</span>
+        <div class="footer-links">
+          <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title">Contact</span>
+        <div class="footer-links">
+          <a href="#">contact@iming.fr</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Groupe IMING</span>
+      <span>Cellule infographie</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

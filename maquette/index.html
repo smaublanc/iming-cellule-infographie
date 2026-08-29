@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Groupe IMING — Cellule Infographie</title>
+  <meta name="description" content="Visualisation 3D et images photoréalistes pour architectes, aménageurs et industriels — cellule infographie du Groupe IMING." />
+  <link rel="icon" type="image/png" href="assets/img/mark-iming.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header" data-header>
+    <div class="header-inner">
+      <a class="brand" href="index.html"><img class="brand-logo" src="assets/img/logo-iming.png" alt="Groupe IMING" /></a>
+      <nav class="header-nav">
+        <a class="header-link" href="equipe.html" data-i18n-fr="Équipe" data-i18n-en="Team">Équipe</a>
+        <div class="lang-switch">
+          <button data-lang="fr" class="is-active">FR</button>
+          <span style="opacity:.4">/</span>
+          <button data-lang="en">EN</button>
+        </div>
+        <button class="burger" data-burger aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" data-mobile-nav>
+    <a href="index.html#top">Accueil</a>
+    <a href="index.html#projets">Projets</a>
+    <a href="equipe.html" data-i18n-fr="Équipe" data-i18n-en="Team">Équipe</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <section class="hero" id="top">
+    <div class="hero-mosaic" data-hero-mosaic></div>
+    <div class="hero-overlay"></div>
+    <img class="hero-mark" src="assets/img/mark-iming.png" alt="" />
+    <div class="hero-content">
+      <span class="hero-stamp">
+        <img src="assets/img/mark-iming.png" alt="" />
+        <span data-i18n-fr="Groupe IMING — Cellule Infographie" data-i18n-en="Groupe IMING — CGI Studio">Groupe IMING — Cellule Infographie</span>
+      </span>
+      <h1 data-i18n-fr="Visualisation 3D" data-i18n-en="3D Visualization">Visualisation 3D</h1>
+      <p class="hero-sub" data-i18n-fr="Pour <span class='accent'>architectes, aménageurs &amp; industriels</span>" data-i18n-en="For <span class='accent'>architects, developers &amp; industrials</span>">Pour <span class="accent">architectes, aménageurs &amp; industriels</span></p>
+      <p class="hero-count" data-hero-count></p>
+    </div>
+    <div class="scroll-cue">
+      <span data-i18n-fr="Défiler" data-i18n-en="Scroll">Défiler</span>
+      <span class="line"></span>
+    </div>
+  </section>
+
+  <div class="filter-bar" id="projets">
+    <button data-filter="tout" class="is-active" data-i18n-fr="Tout" data-i18n-en="All"><span class="num">—</span>Tout</button>
+    <button data-filter="architecture" data-i18n-fr="Architecture" data-i18n-en="Architecture"><span class="num">01</span>Architecture</button>
+    <button data-filter="autoroute" data-i18n-fr="Autoroute" data-i18n-en="Highway"><span class="num">02</span>Autoroute</button>
+    <button data-filter="design" data-i18n-fr="Design" data-i18n-en="Design"><span class="num">03</span>Design</button>
+    <button data-filter="industrie" data-i18n-fr="Industrie" data-i18n-en="Industry"><span class="num">04</span>Industrie</button>
+    <button data-filter="irve" data-i18n-fr="IRVE" data-i18n-en="EV Charging"><span class="num">05</span>IRVE</button>
+    <button data-filter="films" data-i18n-fr="Films" data-i18n-en="Films"><span class="num">06</span>Films</button>
+  </div>
+
+  <section class="grid-section">
+    <div class="grid" data-grid></div>
+  </section>
+
+  <footer class="site-footer" id="contact">
+    <img class="footer-mark" src="assets/img/mark-iming.png" alt="" />
+    <div class="footer-inner">
+      <div>
+        <a href="index.html"><img class="footer-logo" src="assets/img/logo-iming.png" alt="Groupe IMING" /></a>
+        <p class="footer-tagline" data-i18n-fr="Cellule infographie du Groupe IMING — images et animations 3D photoréalistes pour projets d'architecture et d'infrastructure." data-i18n-en="Groupe IMING's in-house CGI studio — photorealistic 3D images and animations for architecture and infrastructure projects.">Cellule infographie du Groupe IMING — images et animations 3D photoréalistes pour projets d'architecture et d'infrastructure.</p>
+      </div>
+      <div>
+        <span class="footer-col-title" data-i18n-fr="Suivre" data-i18n-en="Follow">Suivre</span>
+        <div class="footer-links">
+          <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </div>
+      <div>
+        <span class="footer-col-title" data-i18n-fr="Contact" data-i18n-en="Contact">Contact</span>
+        <div class="footer-links">
+          <a href="#">contact@iming.fr</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Groupe IMING</span>
+      <span data-i18n-fr="Cellule infographie" data-i18n-en="CGI Studio">Cellule infographie</span>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

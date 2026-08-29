@@ -1,0 +1,14 @@
+# Ce depot ne publie que le site statique (maquette/ + Portfolio/) --
+# outils internes, scripts d'automatisation WordPress et ressources de
+# marque brutes exclus volontairement.
+
+Ressources/
+*.php
+*.ps1
+*.bat
+*.json
+*.log
+Thumbs.db
+desktop.ini
+_gsdata_/
+link-check-result.txt
