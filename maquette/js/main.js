@@ -9,6 +9,19 @@ function assetUrl(path) {
   );
 }
 
+// Photos : servies via leurs versions web-optimisees (Portfolio-web/, voir
+// compress-images.ps1) plutot que le fichier source (souvent 2-4 Mo pour
+// une image affichee a 300px de large). "card" = vignette de grille,
+// "full" = galerie/hero de page projet. Videos non concernees (pas de
+// derivee generee pour elles) : on garde le fichier source tel quel.
+function webImageUrl(path, size) {
+  if (!path) return "";
+  if (!/\.(jpe?g|png)$/i.test(path)) return assetUrl(path);
+  const webPath = path.replace(/^Portfolio\//, "Portfolio-web/");
+  const suffixed = size === "card" ? webPath.replace(/\.(jpe?g|png)$/i, ".card.jpg") : webPath.replace(/\.(jpe?g|png)$/i, ".jpg");
+  return assetUrl(suffixed);
+}
+
 function categoryLabel(key) {
   const found = CATEGORIES.find((c) => c.key === key);
   return found ? found.label : key;
@@ -138,9 +151,37 @@ async function detectVignetteVideo(project) {
   return null;
 }
 
+// Apparition progressive au scroll pour les images marquees ".reveal"
+// (grille + galerie projet) : plus fidele au metier (un rendu 3D qui se
+// "revele") qu'un chargement brutal, et gratuit en dependances (juste un
+// IntersectionObserver). Respecte prefers-reduced-motion.
+let revealObserver = null;
+function observeReveals(root) {
+  const scope = root || document;
+  const els = scope.querySelectorAll(".reveal:not(.is-visible)");
+  if (!els.length) return;
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    els.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { rootMargin: "120px 0px", threshold: 0.05 }
+    );
+  }
+  els.forEach((el) => revealObserver.observe(el));
+}
+
 function renderCard(project, index) {
   const cover = pickCover(project);
-  const img = cover ? `<img class="card-img" src="${assetUrl(cover)}" alt="${escapeHtml(project.title)}" loading="lazy" />` : "";
+  const img = cover ? `<img class="card-img reveal" src="${webImageUrl(cover, "card")}" alt="${escapeHtml(project.title)}" loading="lazy" />` : "";
   // La video en boucle au survol ne concerne que les vignettes des projets
   // "Images" (vignette.mp4 dediee). Pour "Films", project.video est le
   // vrai film livre au client : on ne le boucle jamais en muet sur la
@@ -204,6 +245,8 @@ async function initGrid() {
       video.currentTime = 0;
     });
   });
+
+  observeReveals(grid);
 }
 
 function initHero() {
@@ -213,7 +256,7 @@ function initHero() {
     if (covers.length) {
       const tiles = Array.from({ length: 18 }, (_, i) => covers[i % covers.length]);
       mosaic.innerHTML = tiles
-        .map((img, i) => `<img src="${assetUrl(img)}" alt="" loading="${i < 3 ? "eager" : "lazy"}" />`)
+        .map((img, i) => `<img src="${webImageUrl(img, "card")}" alt="" loading="${i < 3 ? "eager" : "lazy"}" />`)
         .join("");
     }
   }
@@ -321,7 +364,7 @@ async function initProjectPage() {
     .map(
       (img, i) => `
         <span class="gallery-item">
-          <img class="project-img" src="${assetUrl(img)}" alt="${escapeHtml(project.title)} — vue ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />
+          <img class="project-img reveal" src="${webImageUrl(img, "full")}" alt="${escapeHtml(project.title)} — vue ${i + 1}" loading="${i === 0 ? "eager" : "lazy"}" />
           <span class="gallery-index">${String(i + 1).padStart(2, "0")} / ${String(project.images.length).padStart(2, "0")}</span>
         </span>`
     )
@@ -330,7 +373,7 @@ async function initProjectPage() {
   const othersHtml = PROJECTS.filter((p) => p.slug !== project.slug)
     .map((p) => {
       const otherCover = pickCover(p);
-      const otherImg = otherCover ? `<img src="${assetUrl(otherCover)}" alt="${escapeHtml(p.title)}" loading="lazy" />` : "";
+      const otherImg = otherCover ? `<img src="${webImageUrl(otherCover, "card")}" alt="${escapeHtml(p.title)}" loading="lazy" />` : "";
       return `
         <a class="others-item" href="projet.html?slug=${p.slug}">
           <span class="others-thumb">${otherImg}</span>
@@ -355,11 +398,11 @@ async function initProjectPage() {
       : "");
 
   const heroCover = pickCover(project);
-  const heroImg = heroCover ? `<img class="project-hero-img" src="${assetUrl(heroCover)}" alt="${escapeHtml(project.title)}" />` : "";
+  const heroImg = heroCover ? `<img class="project-hero-img" src="${webImageUrl(heroCover, "full")}" alt="${escapeHtml(project.title)}" />` : "";
 
   const filmHtml = isFilm
     ? `<section class="project-film">
-        <video class="project-film-player" src="${assetUrl(project.video)}" controls preload="metadata"${heroCover ? ` poster="${assetUrl(heroCover)}"` : ""}></video>
+        <video class="project-film-player" src="${assetUrl(project.video)}" controls preload="metadata"${heroCover ? ` poster="${webImageUrl(heroCover, "full")}"` : ""}></video>
       </section>`
     : `<section class="project-gallery">${galleryHtml}</section>`;
 
@@ -392,6 +435,7 @@ async function initProjectPage() {
   `;
 
   initOthersNav(container);
+  observeReveals(container);
 
   const descEl = container.querySelector("[data-desc]");
   const applyDescLang = (lang) => {

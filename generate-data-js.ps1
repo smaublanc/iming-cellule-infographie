@@ -29,6 +29,7 @@ $catKeyMap = @{
 }
 
 $projectBlocks = @()
+$slugs = @()
 
 foreach ($entry in $inventory) {
   $folder = $entry.Folder
@@ -70,6 +71,7 @@ $imagesJs
   },
 "@
   $projectBlocks += $block
+  $slugs += $slug
 }
 
 $categoriesBlock = @"
@@ -98,4 +100,29 @@ $($projectBlocks -join "`n")
 "@
 
 $header | Out-File -Encoding utf8 (Join-Path $PSScriptRoot "maquette\js\data.js")
-"Genere : $($inventory.Count) projets"
+
+# ---------------------------------------------------------------------
+# sitemap.xml -- regenere a chaque fois (liste des projets = liste des
+# URLs), pour que les nouveaux projets soient decouvrables sans etape
+# manuelle supplementaire.
+$baseUrl = "https://smaublanc.github.io/iming-cellule-infographie"
+$today = Get-Date -Format "yyyy-MM-dd"
+$urlBlocks = @()
+$urlBlocks += "  <url><loc>$baseUrl/maquette/index.html</loc><lastmod>$today</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>"
+$urlBlocks += "  <url><loc>$baseUrl/maquette/equipe.html</loc><lastmod>$today</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>"
+foreach ($slug in $slugs) {
+  $urlBlocks += "  <url><loc>$baseUrl/maquette/projet.html?slug=$slug</loc><lastmod>$today</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>"
+}
+$sitemap = @"
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+$($urlBlocks -join "`n")
+</urlset>
+"@
+# Out-File -Encoding utf8 ajoute un BOM en tete de fichier -- invalide pour
+# un sitemap XML strict ("XML declaration allowed only at the start of the
+# document" cote validateurs). On ecrit donc en UTF-8 sans BOM directement.
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText((Join-Path $PSScriptRoot "sitemap.xml"), $sitemap, $utf8NoBom)
+
+"Genere : $($inventory.Count) projets ($($slugs.Count) URLs dans sitemap.xml)"

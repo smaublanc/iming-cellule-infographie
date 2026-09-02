@@ -43,6 +43,11 @@ Portfolio/
     *.jpg                             -- affiche/poster
     texte.txt
 
+Portfolio-web/                        -- GENERE (compress-images.ps1) -- versions
+  {meme structure que Portfolio/}        web-optimisees des photos, jamais les
+                                          originaux touches. Committe sur Git :
+                                          c'est ce que le site sert reellement.
+
 maquette/                             -- le site lui-meme (HTML/CSS/JS statique)
   index.html, projet.html, equipe.html
   js/data.js                          -- GENERE depuis Portfolio/ (ne pas editer a la main)
@@ -50,10 +55,29 @@ maquette/                             -- le site lui-meme (HTML/CSS/JS statique)
   preview-local.ps1                   -- serveur local pour previsualiser
 
 scan-portfolio.ps1                    -- scanne Portfolio/ -> portfolio-inventory.json
-generate-data-js.ps1                  -- regenere maquette/js/data.js depuis l'inventaire
-maj-portfolio.ps1                     -- lance les deux scripts ci-dessus d'affilee
+compress-images.ps1                   -- genere Portfolio-web/ (incremental, voir plus bas)
+generate-data-js.ps1                  -- regenere maquette/js/data.js + sitemap.xml
+maj-portfolio.ps1                     -- lance les trois scripts ci-dessus d'affilee
 publier.ps1                           -- maj-portfolio.ps1 + commit + push sur GitHub
+
+sitemap.xml, robots.txt, 404.html, index.html (racine)  -- GENERE/statique, SEO + lien racine propre
 ```
+
+## Photos web-optimisees (Portfolio-web/)
+
+Les fichiers dans `Portfolio/` sont les sources (qualité livraison, jamais
+modifiées). `compress-images.ps1` génère dans `Portfolio-web/` deux versions
+par photo, redimensionnées et recompressées en JPEG :
+- `<nom>.card.jpg` — ~900px de large max, pour les vignettes de grille
+- `<nom>.jpg` — ~1800px de large max, pour la galerie / le hero de page projet
+
+C'est **incrémental** : une photo déjà à jour (dérivée plus récente que la
+source) n'est jamais retraitée — le script peut tourner à chaque mise à jour
+sans ralentir. Gain typique observé : ~263 Mo de sources → ~63 Mo de dérivées
+(les deux tailles cumulées), sans perte visible. Les vidéos (vignette.mp4,
+films) ne sont pas concernées — pas d'encodeur vidéo disponible sans
+dépendance externe ; les compresser à l'export (Adobe Media Encoder) reste
+manuel.
 
 ## Conventions de contenu (dossier projet)
 
@@ -123,3 +147,17 @@ et l'ajouter à la liste `CATEGORIES` dans `generate-data-js.ps1`.
   éléments), pas de plugin de traduction.
 - Le thème WordPress (séparé, voir plus haut) réplique exactement le même
   design/comportement — les deux sont maintenus en parallèle.
+- Les images de la grille et de la galerie apparaissent progressivement au
+  scroll (classe `.reveal` + `IntersectionObserver` dans `main.js`/`theme.js`,
+  respecte `prefers-reduced-motion`) plutôt que de charger d'un coup.
+- Balises Open Graph / Twitter Card : génériques sur la maquette (une seule
+  page `projet.html?slug=...` sert tous les projets, donc l'aperçu ne varie
+  pas par projet — pour ça il faudrait une page statique par projet, pas fait).
+  Sur WordPress en revanche, chaque page est rendue côté serveur : les
+  balises OG y sont **réellement par projet** (titre, extrait du texte FR,
+  image mise en avant) — voir `header.php`.
+- `sitemap.xml` régénéré à chaque `generate-data-js.ps1` (liste les projets
+  courants automatiquement) ; attention à ne pas réintroduire de BOM UTF-8
+  en tête de fichier si ce script est retouché (`Out-File -Encoding utf8` en
+  ajoute un, invalide pour un sitemap XML strict — d'où l'écriture via
+  `[System.IO.File]::WriteAllText` avec un `UTF8Encoding($false)`).
