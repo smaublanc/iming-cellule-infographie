@@ -266,6 +266,32 @@ function initHeader() {
   });
 }
 
+// Bandeau "autres projets" : la barre de defilement native est masquee
+// (esthetique), donc sans ceci il n'y a aucun moyen visible de naviguer
+// dedans au clic -- seul un geste de scroll horizontal (peu decouvrable
+// a la souris) le permettait.
+function initOthersNav(container) {
+  const row = container.querySelector("[data-others-row]");
+  const prevBtn = container.querySelector("[data-others-prev]");
+  const nextBtn = container.querySelector("[data-others-next]");
+  if (!row || !prevBtn || !nextBtn) return;
+
+  const scrollByPage = (dir) => {
+    row.scrollBy({ left: dir * row.clientWidth * 0.8, behavior: "smooth" });
+  };
+  prevBtn.addEventListener("click", () => scrollByPage(-1));
+  nextBtn.addEventListener("click", () => scrollByPage(1));
+
+  const updateArrows = () => {
+    const max = row.scrollWidth - row.clientWidth;
+    prevBtn.disabled = row.scrollLeft <= 4;
+    nextBtn.disabled = row.scrollLeft >= max - 4;
+  };
+  row.addEventListener("scroll", updateArrows, { passive: true });
+  window.addEventListener("resize", updateArrows);
+  updateArrows();
+}
+
 async function initProjectPage() {
   const container = document.querySelector("[data-project]");
   if (!container) return;
@@ -354,10 +380,18 @@ async function initProjectPage() {
     </section>
     ${filmHtml}
     <section class="project-others">
-      <p class="others-title" data-i18n-fr="Autres projets" data-i18n-en="Other projects">Autres projets</p>
-      <div class="others-row">${othersHtml}</div>
+      <div class="others-header">
+        <p class="others-title" data-i18n-fr="Autres projets" data-i18n-en="Other projects">Autres projets</p>
+        <div class="others-nav">
+          <button class="others-arrow" data-others-prev aria-label="Précédent" type="button">&larr;</button>
+          <button class="others-arrow" data-others-next aria-label="Suivant" type="button">&rarr;</button>
+        </div>
+      </div>
+      <div class="others-row" data-others-row>${othersHtml}</div>
     </section>
   `;
+
+  initOthersNav(container);
 
   const descEl = container.querySelector("[data-desc]");
   const applyDescLang = (lang) => {
