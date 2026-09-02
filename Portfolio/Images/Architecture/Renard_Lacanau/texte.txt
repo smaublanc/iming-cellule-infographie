@@ -1,9 +1,39 @@
-CLIENT: Renard
-ARCHITECTE: 
-ANNEE: 
+CLIENT:
+ARCHITECTE: Yvain Renard
+ANNEE: 2025
 
 [FR]
+Maître d’ouvrage > Ville de Lacanau
+Adresse projet > Chemin de Méogas / 33680 Lacanau
+Equipe MOE > AAYR (arch. mandataire) + ATELIER GARDONI (Paysage) + ALIENOR NA (Structures, Thermique, Fluides, VRD) + LASA (Acoustique) + BEGC (Cuisine collective)
+Surface > 1030 m² SDP
+Enveloppe > 2.755.285 € HT
+Procédure > Concours, 2025
+Mission(s) > Complète base loi MOP
+Calendrier > Etudes en cours, livraison courant 2028
+Performance(s) > RE 2020, matériaux biosourcés
+Image(s) / Photographies > Sébastien Maublanc
+Le projet consiste en la construction d’un restaurant scolaire et de locaux d’Accueil Périscolaire (APS) au cœur du groupe scolaire de Lacanau Ville. Implanté de manière centrale, le nouveau bâtiment agit comme une colonne vertébrale reliant l’école maternelle et élémentaire, clarifiant l’organisation du site et hiérarchisant les flux. Il permet une séparation nette entre les circulations des enfants, des familles et des services techniques, tout en renforçant la lisibilité des accès depuis l’espace public.
 
+Le projet requalifie également les espaces extérieurs en créant de véritables parvis sécurisés, des cheminements doux et des cours plus végétalisées, inclusives et perméables.
+
+L’architecture, volontairement sobre et ancrée dans le contexte local, privilégie des volumes simples, des matériaux durables et une forte relation entre intérieur et extérieur. Le bâtiment intègre une cuisine évolutive, destinée à devenir une cuisine centrale, et s’inscrit dans une démarche environnementale ambitieuse.
+
+https://www.yvainrenard.com/projet/construction-dun-restaurant-scolaire-et-dun-espace-aps/
 
 [EN]
+Client > City of Lacanau
+Project address > Chemin de Méogas, 33680 Lacanau, France
+Design team > AAYR (lead architect) + ATELIER GARDONI (landscape) + ALIENOR NA (structural, thermal & MEP engineering) + LASA (acoustics) + BEGC (collective catering kitchen)
+Floor area > 1,030 m² GFA
+Budget > €2,755,285 excl. VAT
+Procedure > Competition, 2025
+Scope > Full design-to-completion mandate under the French "loi MOP" framework
+Schedule > Design in progress, delivery expected in 2028
+Performance > RE2020 French building energy code, bio-based materials
+Images / Renders > Sébastien Maublanc
+The project consists of a new school restaurant and after-school care facility (APS) at the heart of the Lacanau Ville school complex. Centrally positioned, the new building acts as a spine linking the nursery and primary schools, clarifying the site's layout and organizing circulation. It creates a clear separation between children, families and technical/service routes, while making access from the public realm more legible.
 
+The project also upgrades the outdoor spaces, creating secure forecourts, soft-mobility paths and greener, more inclusive, permeable playgrounds.
+
+Deliberately understated and rooted in its local context, the architecture favors simple volumes, durable materials and a strong indoor-outdoor relationship. The building includes an adaptable kitchen designed to evolve into a central catering kitchen, as part of an ambitious environmental approach.

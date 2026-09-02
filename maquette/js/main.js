@@ -47,24 +47,52 @@ function parseProjectText(raw) {
   const body = frIdx === -1 ? raw : raw.slice(frIdx);
 
   const meta = {};
+  // "client" a un cas particulier : une ligne "CLIENT:" presente mais VIDE
+  // signifie "ne pas afficher de client" (ex. le client se confond avec
+  // l'architecte) -- a distinguer de l'ABSENCE de la ligne, qui garde le
+  // repli habituel sur le nom derive du dossier (voir clientSpecified).
+  let clientSpecified = false;
   header.split("\n").forEach((line) => {
     const m = line.match(/^([A-Za-zÀ-ÿ ]+):\s*(.*)$/);
     if (!m) return;
     const key = m[1].trim().toLowerCase();
     const value = m[2].trim();
-    if (value) meta[key] = value;
+    if (key === "client") {
+      clientSpecified = true;
+      meta[key] = value;
+    } else if (value) {
+      meta[key] = value;
+    }
   });
 
   const enIdx = body.search(/\[EN\]/i);
-  const frText = (enIdx === -1 ? body : body.slice(0, enIdx)).replace(/\[FR\]/i, "").trim();
-  const enText = (enIdx === -1 ? "" : body.slice(enIdx).replace(/\[EN\]/i, "")).trim();
+  let frText = (enIdx === -1 ? body : body.slice(0, enIdx)).replace(/\[FR\]/i, "").trim();
+  let enText = (enIdx === -1 ? "" : body.slice(enIdx).replace(/\[EN\]/i, "")).trim();
+
+  // Un lien colle seul sur sa ligne (ex. vers la page du projet sur le
+  // site de l'architecte) : on le sort du texte pour l'afficher comme un
+  // vrai lien plutot que de laisser une URL brute au milieu du paragraphe.
+  const urlRe = /^https?:\/\/\S+$/m;
+  let link = null;
+  const frLinkMatch = frText.match(urlRe);
+  if (frLinkMatch) {
+    link = frLinkMatch[0];
+    frText = frText.replace(frLinkMatch[0], "").replace(/\n{3,}/g, "\n\n").trim();
+  }
+  const enLinkMatch = enText.match(urlRe);
+  if (enLinkMatch) {
+    link = link || enLinkMatch[0];
+    enText = enText.replace(enLinkMatch[0], "").replace(/\n{3,}/g, "\n\n").trim();
+  }
 
   return {
     client: meta["client"],
+    clientSpecified: clientSpecified,
     architecte: meta["architecte"],
     annee: meta["annee"] || meta["année"],
     fr: frText,
     en: enText || frText,
+    link: link,
   };
 }
 
@@ -249,7 +277,10 @@ async function initProjectPage() {
   document.title = `${project.title} — Groupe IMING`;
 
   const parsed = (await loadProjectText(project)) || {};
-  const client = parsed.client || project.client;
+  // "CLIENT:" vide et explicite dans texte.txt = volontairement pas de
+  // client affiche (ex. le client se confond avec l'architecte) -- sinon
+  // repli sur le nom derive du dossier, comme avant.
+  const client = parsed.clientSpecified ? parsed.client : (parsed.client || project.client);
   const architecte = parsed.architecte;
   const annee = parsed.annee;
   const frText = parsed.fr || "Description à venir.";
@@ -282,11 +313,20 @@ async function initProjectPage() {
     })
     .join("");
 
+  // Si un lien est fourni (page projet sur le site de l'architecte, etc.),
+  // le nom de l'architecte devient cliquable plutot que d'afficher l'URL
+  // brute quelque part dans le texte.
+  const architecteValue = parsed.link
+    ? `<a href="${escapeHtml(parsed.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(architecte)} ↗</a>`
+    : escapeHtml(architecte);
+
   const fieldsHtml =
     (architecte
-      ? `<div class="field"><span class="field-label" data-i18n-fr="Architecte" data-i18n-en="Architect">Architecte</span><span class="field-value">${escapeHtml(architecte)}</span></div>`
+      ? `<div class="field"><span class="field-label" data-i18n-fr="Architecte" data-i18n-en="Architect">Architecte</span><span class="field-value">${architecteValue}</span></div>`
       : "") +
-    `<div class="field"><span class="field-label" data-i18n-fr="Client" data-i18n-en="Client">Client</span><span class="field-value">${escapeHtml(client)}</span></div>`;
+    (client
+      ? `<div class="field"><span class="field-label" data-i18n-fr="Client" data-i18n-en="Client">Client</span><span class="field-value">${escapeHtml(client)}</span></div>`
+      : "");
 
   const heroCover = pickCover(project);
   const heroImg = heroCover ? `<img class="project-hero-img" src="${assetUrl(heroCover)}" alt="${escapeHtml(project.title)}" />` : "";

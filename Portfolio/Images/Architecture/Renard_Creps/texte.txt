@@ -1,9 +1,35 @@
-CLIENT: Renard
-ARCHITECTE: 
-ANNEE: 
+CLIENT:
+ARCHITECTE: Yvain Renard
+ANNEE: 2026 
 
 [FR]
+Maître d’ouvrage > Région Nouvelle Aquitaine + BMA (mand.)
+Adresse projet > 653 Cours de la Libération / 33400 Talence
+Equipe MOE > AAYR (arch. mandataire) + IG CONCEPT (Structures, Thermique, Fluides, VRD) + EUGEE (Environnement) + CUISINORME (Lingerie) + EMACOUSTIC (Acoustique) + COGESMO (OPC)
+Surface > 791m² SDP, dont 294m² en extension
+Enveloppe > 1.163.349 € HT
+Procédure > Concours, 2025
+Mission(s) > Complète de base loi MOP + DIAG + SSI + OPC + CEM +TDS + SYN + ACG
+Performance(s) > RE 2020, Guide Environnemental Région NA
 
+Le projet de restructuration et d’extension du service technique du CREPS de Bordeaux vise à réorganiser des locaux dispersés sur un site de grande qualité, marqué par des espaces verts et la présence d’arbres protégés, tout en valorisant l’église classée.
+
+L’extension, implantée au nord des garages existants, crée un pôle Maintenance autonome et structuré, libérant la voie centrale qui devient une venelle paysagère axée sur l’église. Les bâtiments existants sont par ailleurs réhabilités pour accueillir l’administration, la lingerie et les espaces de support, avec des accès clarifiés pour le personnel et le public. Le phasage assure la continuité de l’activité sans installations temporaires.
+
+L’architecture contemporaine privilégie le bois, la ventilation naturelle et l’éclairage optimisé, à l’appui de façades rythmées et sobres. Le projet combine fonctionnalité, ergonomie, durabilité et faible impact environnemental, avec une attention particulière portée à l’usage quotidien des locaux.
 
 [EN]
+Client > Nouvelle-Aquitaine Region + BMA (delegated contracting authority)
+Project address > 653 Cours de la Libération, 33400 Talence, France
+Design team > AAYR (lead architect) + IG CONCEPT (structural, thermal & MEP engineering) + EUGEE (environmental) + CUISINORME (laundry fit-out) + EMACOUSTIC (acoustics) + COGESMO (site coordination)
+Floor area > 791 m² GFA, including a 294 m² extension
+Budget > €1,163,349 excl. VAT
+Procedure > Competition, 2025
+Scope > Full design-to-completion mandate under the French "loi MOP" framework, plus diagnostics, fire safety, site coordination, health & safety coordination, technical inspection, as-built surveys and accessibility compliance
+Performance > RE2020 French building energy code, Nouvelle-Aquitaine Region environmental guidelines
 
+The refurbishment and extension of CREPS Bordeaux's technical services building reorganizes facilities currently scattered across a high-quality site defined by mature greenery and protected trees, while showcasing the site's listed church.
+
+Positioned north of the existing garages, the extension forms a self-contained Maintenance hub, freeing up the central access road to become a landscaped lane framed on the church. The existing buildings are refurbished to house administration, the laundry and support spaces, with clearer, separate circulation for staff and visitors. Phasing was designed to keep operations running throughout, with no need for temporary facilities.
+
+The contemporary design favors timber construction, natural ventilation and optimized lighting, expressed through restrained, rhythmic façades. The result balances functionality, ergonomics, sustainability and low environmental impact, with close attention paid to how the spaces are used day to day.

@@ -1,9 +1,39 @@
-CLIENT: Renard
-ARCHITECTE: 
-ANNEE: 
+CLIENT:
+ARCHITECTE: Yvain Renard
+ANNEE:
 
 [FR]
+Maître d’ouvrage > Comm. de Communes Latitude Nord Gironde
+Adresse projet > 152 route de Pugnac / 33920 Civrac-de-Blaye
+Equipe MOE > AAYR (arch. mandataire) + ATELIER GARDONI (Paysage) + ODETEC (Structures, Thermique, Fluides, SSI, VRD) + EUGEE (Environnement) + EMACOUSTIC + COGESMO (OPC)
+Surface > 1547m² SDP
+Enveloppe > 4.337.491 € HT
+Procédure > Concours, 2024
+Mission(s) > Complète base loi MOP + OPC + SSI + QCES
+Calendrier > Chantier en cours, livraison juin 2027
+Performance(s) > RE 2020 seuil 2025, démarche BDNA niveau Argent, cours végétalisées, géothermie, matériaux biosourcés
+Image(s) / Photographies > LEO 3D
+Le projet est pensé comme un équipement de proximité fortement ancré dans le bourg et son réseau de cheminements doux. L’implantation privilégie une façade d’accueil orientée vers le centre du village afin de sécuriser les déplacements des enfants, et renforcer les mobilités piétonnes.
 
+L’architecture s’organise en trois volumes inspirés des chais viticoles, distinguant des pôles par âges (3-6 ans et 6-12 ans), unifiés par des espaces partagés et articulés autour d’un patio source de lumière naturelle, de convivialité et de lien à la nature.
+
+Le projet accorde une place très importante aux matériaux bio et géo-sourcés, tant pour l’enveloppe que pour les aménagements intérieurs. Le chauffage et le rafraîchissement des locaux se fait par géothermie. Le projet paysager propose enfin des cours inclusives, ludiques et largement végétalisées, supports d’apprentissage et de bien-être. Le projet est conduit avec une démarche BDNA, niveau Argent.
+
+https://www.yvainrenard.com/projet/construction-dun-alsh-a-civrac-de-blaye/
 
 [EN]
+Client > Latitude Nord Gironde Community of Communes
+Project address > 152 route de Pugnac, 33920 Civrac-de-Blaye, France
+Design team > AAYR (lead architect) + ATELIER GARDONI (landscape) + ODETEC (structural, thermal, MEP & fire-safety engineering) + EUGEE (environmental) + EMACOUSTIC (acoustics) + COGESMO (site coordination)
+Floor area > 1,547 m² GFA
+Budget > €4,337,491 excl. VAT
+Procedure > Competition, 2024
+Scope > Full design-to-completion mandate under the French "loi MOP" framework, plus site coordination, fire safety and quality/environmental site control
+Schedule > Under construction, delivery in June 2027
+Performance > RE2020 (2025 threshold), BDNA Silver-level approach, planted courtyards, geothermal energy, bio-based materials
+Images / Renders > LEO 3D
+The project is conceived as a neighborhood facility deeply rooted in the village and its network of soft-mobility paths. Its layout favors a welcoming façade facing the village centre, making children's journeys safer and strengthening pedestrian mobility.
 
+The architecture is organized into three volumes inspired by wine-storage warehouses, distinguishing age groups (3–6 and 6–12 years) unified by shared spaces and arranged around a patio that brings in natural light, fosters conviviality and connects the building to nature.
+
+The project gives strong priority to bio- and geo-sourced materials, both for the envelope and interior fit-out. Heating and cooling are provided by geothermal energy. The landscape design rounds things out with inclusive, playful, heavily planted courtyards that support learning and wellbeing. The project follows a BDNA (Bâtiment Durable Nouvelle-Aquitaine) approach, Silver level.

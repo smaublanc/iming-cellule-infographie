@@ -618,6 +618,16 @@ button {
   letter-spacing: 0.5px;
 }
 
+.field-value a {
+  border-bottom: 1px solid var(--color-border);
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.field-value a:hover {
+  color: var(--color-red);
+  border-color: var(--color-red);
+}
+
 .project-gallery {
   /* Volontairement plus large que .project-body (760px) : les images du
      projet sont le propos principal de la page, le texte reste dans une
