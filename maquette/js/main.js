@@ -188,10 +188,18 @@ function renderCard(project, index) {
   // grille, on garde juste la vignette fixe (le film se regarde sur sa
   // page projet, cf. initProjectPage).
   const video = project.video && project.category !== "films" ? `<video class="card-video" src="${assetUrl(project.video)}" muted loop playsinline preload="metadata"></video>` : "";
-  const featured = index % 5 === 0 ? " is-featured" : "";
+  // Rythme editorial plutot qu'une grille uniforme : une carte sur 5 passe
+  // en format large (16:10, 2 colonnes) ; plus rarement (une sur 11, jamais
+  // en meme temps que "large") une carte casse le rythme en format
+  // cinemascope (21:9, 3 colonnes) -- inspire des ruptures de grille
+  // asymetriques de Kilograph/Squint-Opera plutot qu'un mur de vignettes
+  // identiques.
+  let variant = "";
+  if (index % 5 === 0) variant = " is-featured";
+  else if (index % 11 === 7) variant = " is-wide";
   const num = String(index + 1).padStart(2, "0");
   return `
-    <a class="card${featured}" href="projet.html?slug=${project.slug}" data-category="${escapeHtml(project.category)}">
+    <a class="card${variant}" href="projet.html?slug=${project.slug}" data-category="${escapeHtml(project.category)}">
       <span class="card-media">
         ${img}
         ${video}

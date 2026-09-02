@@ -416,6 +416,14 @@ button {
   aspect-ratio: 16 / 10;
 }
 
+.card.is-wide {
+  grid-column: span 3;
+}
+
+.card.is-wide .card-media {
+  aspect-ratio: 21 / 9;
+}
+
 .card-media {
   position: relative;
   display: block;
@@ -460,7 +468,10 @@ button {
 }
 
 .card:hover .card-img {
-  transform: scale(1.045);
+  /* Zoom tres subtil au survol (retenue inspiree de MIR, qui n'en fait
+     aucun) -- garde un minimum de feedback interactif sans faire
+     concurrence a l'image. */
+  transform: scale(1.02);
   filter: grayscale(0%);
 }
 
@@ -983,10 +994,12 @@ button {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .card.is-featured {
+  .card.is-featured,
+  .card.is-wide {
     grid-column: span 1;
   }
-  .card.is-featured .card-media {
+  .card.is-featured .card-media,
+  .card.is-wide .card-media {
     aspect-ratio: 4 / 5;
   }
   .footer-inner {

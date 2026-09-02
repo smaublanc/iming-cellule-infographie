@@ -150,6 +150,13 @@ et l'ajouter à la liste `CATEGORIES` dans `generate-data-js.ps1`.
 - Les images de la grille et de la galerie apparaissent progressivement au
   scroll (classe `.reveal` + `IntersectionObserver` dans `main.js`/`theme.js`,
   respecte `prefers-reduced-motion`) plutôt que de charger d'un coup.
+- Grille homepage volontairement asymétrique plutôt qu'un mur de vignettes
+  identiques : une carte sur 5 en format large (`is-featured`, 16:10, 2
+  colonnes), une sur 11 en cinémascope (`is-wide`, 21:9, 3 colonnes), jamais
+  les deux en même temps (logique `else if` dans `renderCard()`/
+  `project-card.php`). Repli propre en 1 colonne / 4:5 sous 1100px. Zoom au
+  survol volontairement très subtil (1.02, pas 1.05+) — inspiré de la
+  retenue de mir.no, qui n'en fait aucun.
 - Balises Open Graph / Twitter Card : génériques sur la maquette (une seule
   page `projet.html?slug=...` sert tous les projets, donc l'aperçu ne varie
   pas par projet — pour ça il faudrait une page statique par projet, pas fait).
