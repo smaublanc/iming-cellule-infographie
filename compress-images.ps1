@@ -4,11 +4,24 @@
 #
 # Pour chaque image source (Portfolio/...) on genere dans Portfolio-web/...
 # (meme chemin relatif) deux versions redimensionnees et recompressees :
-#   - <nom>.card.jpg  -- pour les vignettes de grille (~900px de large max)
-#   - <nom>.jpg       -- pour la galerie / le hero de page projet (~1800px)
+#   - <nom>.card.jpg  -- pour les vignettes de grille NORMALES (~900px de
+#                        large max). Les cartes "large"/"cinemascope"
+#                        (is-featured/is-wide, 2-3 colonnes) s'affichent
+#                        bien plus grand a l'ecran -- main.js/project-card.php
+#                        leur donnent volontairement la derivee ".jpg"
+#                        (1800px) a la place, sinon l'image est agrandie
+#                        au-dela de sa resolution et devient floue.
+#   - <nom>.jpg       -- pour la galerie / le hero de page projet / les
+#                        grandes vignettes (~1800px de large max)
+# Qualite 84/90 (pas 78/82) : les rendus 3D ont des degrades fins (ciel,
+# eclairage) ou la compression JPEG agressive se voit vite -- mieux vaut
+# quelques Ko de plus qu'un rendu qui a l'air "pas ouff".
 # Incremental : une derivee deja a jour (plus recente que la source) n'est
 # pas regeneree -- essentiel car ce script tourne a chaque mise a jour du
-# site, pas seulement une fois.
+# site, pas seulement une fois. Si tu changes MaxEdge/Quality ci-dessous,
+# supprime Portfolio-web/ avant de relancer pour forcer une regeneration
+# complete (sinon les derivees existantes, plus recentes que leur source,
+# sont gardees telles quelles).
 #
 # Les videos (vignette.mp4/webm, films) ne sont PAS traitees ici -- pas
 # d'encodeur video disponible sans dependance externe. Voir les presets
@@ -22,8 +35,8 @@ $srcRoot = Join-Path $PSScriptRoot "Portfolio"
 $dstRoot = Join-Path $PSScriptRoot "Portfolio-web"
 
 $sizes = @(
-  @{ Suffix = ".card"; MaxEdge = 900;  Quality = 78 }
-  @{ Suffix = "";       MaxEdge = 1800; Quality = 82 }
+  @{ Suffix = ".card"; MaxEdge = 900;  Quality = 84 }
+  @{ Suffix = "";       MaxEdge = 1800; Quality = 90 }
 )
 
 function Get-JpegEncoder {

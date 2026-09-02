@@ -181,13 +181,6 @@ function observeReveals(root) {
 
 function renderCard(project, index) {
   const cover = pickCover(project);
-  const img = cover ? `<img class="card-img reveal" src="${webImageUrl(cover, "card")}" alt="${escapeHtml(project.title)}" loading="lazy" />` : "";
-  // La video en boucle au survol ne concerne que les vignettes des projets
-  // "Images" (vignette.mp4 dediee). Pour "Films", project.video est le
-  // vrai film livre au client : on ne le boucle jamais en muet sur la
-  // grille, on garde juste la vignette fixe (le film se regarde sur sa
-  // page projet, cf. initProjectPage).
-  const video = project.video && project.category !== "films" ? `<video class="card-video" src="${assetUrl(project.video)}" muted loop playsinline preload="metadata"></video>` : "";
   // Rythme editorial plutot qu'une grille uniforme : une carte sur 5 passe
   // en format large (16:10, 2 colonnes) ; plus rarement (une sur 11, jamais
   // en meme temps que "large") une carte casse le rythme en format
@@ -197,6 +190,19 @@ function renderCard(project, index) {
   let variant = "";
   if (index % 5 === 0) variant = " is-featured";
   else if (index % 11 === 7) variant = " is-wide";
+  // Une carte large/cinemascope affiche sa vignette bien plus grand a
+  // l'ecran qu'une carte normale (jusqu'a ~950px de large sur un ecran
+  // large, plus en Retina) -- la derivee ".card" (900px) y serait agrandie
+  // au-dela de sa resolution et paraitrait floue. On lui donne la derivee
+  // "full" (1800px), la meme que la galerie/le hero de page projet.
+  const imgSize = variant ? "full" : "card";
+  const img = cover ? `<img class="card-img reveal" src="${webImageUrl(cover, imgSize)}" alt="${escapeHtml(project.title)}" loading="lazy" />` : "";
+  // La video en boucle au survol ne concerne que les vignettes des projets
+  // "Images" (vignette.mp4 dediee). Pour "Films", project.video est le
+  // vrai film livre au client : on ne le boucle jamais en muet sur la
+  // grille, on garde juste la vignette fixe (le film se regarde sur sa
+  // page projet, cf. initProjectPage).
+  const video = project.video && project.category !== "films" ? `<video class="card-video" src="${assetUrl(project.video)}" muted loop playsinline preload="metadata"></video>` : "";
   const num = String(index + 1).padStart(2, "0");
   return `
     <a class="card${variant}" href="projet.html?slug=${project.slug}" data-category="${escapeHtml(project.category)}">

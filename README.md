@@ -67,14 +67,22 @@ sitemap.xml, robots.txt, 404.html, index.html (racine)  -- GENERE/statique, SEO 
 
 Les fichiers dans `Portfolio/` sont les sources (qualité livraison, jamais
 modifiées). `compress-images.ps1` génère dans `Portfolio-web/` deux versions
-par photo, redimensionnées et recompressées en JPEG :
-- `<nom>.card.jpg` — ~900px de large max, pour les vignettes de grille
-- `<nom>.jpg` — ~1800px de large max, pour la galerie / le hero de page projet
+par photo, redimensionnées et recompressées en JPEG (qualité 84/90 — assez
+haute pour ne pas voir la compression sur des dégradés fins comme un ciel) :
+- `<nom>.card.jpg` — ~900px de large max, pour les vignettes de grille NORMALES
+- `<nom>.jpg` — ~1800px de large max, pour la galerie, le hero de page projet,
+  **et les cartes homepage "large"/"cinémascope"** (`is-featured`/`is-wide` —
+  elles s'affichent bien plus grand à l'écran qu'une carte normale ; leur
+  donner la dérivée `.card` les aurait agrandies au-delà de leur résolution
+  et rendues floues — vécu, corrigé). `renderCard()`/`project-card.php`
+  choisissent la taille selon la classe de la carte.
 
 C'est **incrémental** : une photo déjà à jour (dérivée plus récente que la
 source) n'est jamais retraitée — le script peut tourner à chaque mise à jour
-sans ralentir. Gain typique observé : ~263 Mo de sources → ~63 Mo de dérivées
-(les deux tailles cumulées), sans perte visible. Les vidéos (vignette.mp4,
+sans ralentir. Si tu changes `MaxEdge`/`Quality` dans le script, supprime
+`Portfolio-web/` avant de relancer pour forcer une régénération complète.
+Gain typique observé : ~263 Mo de sources → ~82 Mo de dérivées (les deux
+tailles cumulées). Les vidéos (vignette.mp4,
 films) ne sont pas concernées — pas d'encodeur vidéo disponible sans
 dépendance externe ; les compresser à l'export (Adobe Media Encoder) reste
 manuel.
